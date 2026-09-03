@@ -3,7 +3,7 @@
 <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:F5E6C8,100:E8B923&height=200&section=header&text=Ledger&fontSize=70&fontColor=2B2416&fontAlignY=38&desc=split%20bills%2C%20not%20friendships&descAlignY=58&descSize=20&animation=fadeIn" alt="Ledger banner"/>
 
 <a href="https://github.com/Lakshpri/ledger-billsplit">
-  
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&duration=2800&pause=1200&color=E8B923&center=true&vCenter=true&width=650&lines=Who+owes+whom%3F+Let+the+algorithm+decide.;Groups.+Expenses.+Settlements.+Simplified.;Built+with+Angular+%2B+Spring+Boot+%2B+PostgreSQL." alt="Typing SVG" />
 </a>
 
 <br/>
@@ -27,8 +27,6 @@
 <p align="center">
   <img src="./assets/app-screenshot.png" width="90%" alt="Ledger app screenshot" />
 </p>
-
-<p align="center"><i>🎥 A full demo GIF (creating a group → adding an expense → settling up) goes here — record one with <a href="https://www.screentogif.com/">ScreenToGif</a> or your OS screen recorder and drop it in <code>assets/demo.gif</code>.</i></p>
 
 ---
 
