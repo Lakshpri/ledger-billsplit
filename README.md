@@ -35,7 +35,7 @@
 
 ---
 
-### ✍️ What is this?
+### What is this?
 
 A full-stack, notebook-styled bill splitter. Create a group, log shared expenses in three different ways, and let a **debt-simplification algorithm** figure out the minimum number of payments needed to settle everyone up — instead of everyone paying everyone.
 
@@ -45,19 +45,19 @@ A full-stack, notebook-styled bill splitter. Create a group, log shared expenses
 <tr>
 <td width="33%" valign="top">
 
-#### 👥 Groups
+#### Groups
 Create groups, invite members by email, see everyone's avatar at a glance.
 
 </td>
 <td width="33%" valign="top">
 
-#### 🧾 Expenses
+#### Expenses
 Split **equally**, by **exact amounts**, or by **percentage** — each with its own currency snapshot.
 
 </td>
 <td width="33%" valign="top">
 
-#### ⚖️ Balances
+#### Balances
 A greedy algorithm collapses tangled IOUs into the *fewest possible payments*.
 
 </td>
@@ -68,12 +68,9 @@ A greedy algorithm collapses tangled IOUs into the *fewest possible payments*.
 
 ---
 
-### 🧠 Under the hood
-┌─────────────────────┐ JWT ┌──────────────────────┐ JPA ┌─────────────┐
-│ Angular Frontend │ ─────────────────▶ │ Spring Boot Backend │ ─────────────────▶ │ PostgreSQL │
-│ standalone + signals│ ◀───────────────── │ REST + BCrypt auth │ ◀───────────────── │ │
-└─────────────────────┘ └──────────────────────┘ └─────────────┘
+### Under the hood
 
+**Angular Frontend** → (JWT) → **Spring Boot Backend** → (JPA) → **PostgreSQL**, and the response flows back the same path in reverse.
 
 | Layer | Stack |
 |---|---|
@@ -86,17 +83,17 @@ A greedy algorithm collapses tangled IOUs into the *fewest possible payments*.
 
 ---
 
-### 🚀 Quick start
+### Quick start
 
 ```bash
 # 1. Database
 psql -U postgres -c "CREATE DATABASE billsplit;"
 
-# 2. Backend  → http://localhost:8765
+# 2. Backend  -> http://localhost:8765
 cd backend
 mvn spring-boot:run
 
-# 3. Frontend → http://localhost:4200 (in a second terminal)
+# 3. Frontend -> http://localhost:4200 (in a second terminal)
 cd frontend
 npm install
 npm start
@@ -108,21 +105,21 @@ Then open **http://localhost:4200**, create an account, spin up a group, invite 
 
 ---
 
-### ⚙️ What's implemented
+### What's implemented
 
-- 🔐 **Auth** — register/login with JWT, passwords hashed with BCrypt
-- 👥 **Groups** — create, list, view, invite members by email
-- 🧾 **Expenses** — three split modes (equal / exact / percentage), each with its own currency + exchange-rate snapshot
-- ⚖️ **Balances** — live "who owes whom" per group, shown in the group's base currency
-- 🧮 **Debt simplification** — a greedy algorithm reduces everyone's tangled IOUs to the minimum number of payments needed to settle up → [`BalanceService.java`](backend/src/main/java/com/notebook/splitter/service/BalanceService.java)
-- 💵 **Settlements** — record a payment (currency + note optional), view full settlement history per group
-- 🌍 **Multi-currency** — every expense/settlement stores its own currency + a snapshot exchange rate to the group's base currency, so historical amounts stay accurate even if today's rates change
+- **Auth** — register/login with JWT, passwords hashed with BCrypt
+- **Groups** — create, list, view, invite members by email
+- **Expenses** — three split modes (equal / exact / percentage), each with its own currency + exchange-rate snapshot
+- **Balances** — live "who owes whom" per group, shown in the group's base currency
+- **Debt simplification** — a greedy algorithm reduces everyone's tangled IOUs to the minimum number of payments needed to settle up → [`BalanceService.java`](backend/src/main/java/com/notebook/splitter/service/BalanceService.java)
+- **Settlements** — record a payment (currency + note optional), view full settlement history per group
+- **Multi-currency** — every expense/settlement stores its own currency + a snapshot exchange rate to the group's base currency, so historical amounts stay accurate even if today's rates change
 
 <br/>
 
 ---
 
-### 🔍 Where to look first
+### Where to look first
 
 | Curious about... | Look here |
 |---|---|
@@ -135,7 +132,7 @@ Then open **http://localhost:4200**, create an account, spin up a group, invite 
 
 ---
 
-### 🌱 Beginner-friendly by design
+### Beginner-friendly by design
 
 - `spring.jpa.hibernate.ddl-auto: update` — no hand-run SQL migrations while learning; the backend builds its own tables
 - Every backend class has a short comment explaining **why** it exists, not just what it does
