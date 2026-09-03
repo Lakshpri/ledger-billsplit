@@ -1,0 +1,279 @@
+/* ============================================================================
+   LEDGER — a notebook-styled bill splitter
+   Design tokens
+   - Paper:      #F7F1E3 (warm cream, aged paper)
+   - Rule lines: #B9CFE6 (faded blue fountain-pen rule)
+   - Margin:     #D8746B (red margin line, muted terracotta-red ink)
+   - Ink:        #2B3A55 (navy ink — primary text)
+   - Pencil:     #8A8375 (soft grey — secondary text)
+   - Highlight:  #F6D35C (highlighter yellow)
+   - Sticky pink:#F6C6CE   Sticky mint:#B7DCC4   Sticky sky:#AFCBEA  Sticky sand:#E7CFA0
+   Type: "Caveat" (handwritten display) + "Nunito Sans" (body) + "Patrick Hand" (ui labels/tape)
+   ============================================================================ */
+
+:root {
+  --paper: #F7F1E3;
+  --paper-white: #FFFDF7;
+  --rule: #B9CFE6;
+  --margin: #D8746B;
+  --ink: #2B3A55;
+  --ink-soft: #4C5A73;
+  --pencil: #8A8375;
+  --highlight: #F6D35C;
+  --sticky-pink: #F6C6CE;
+  --sticky-mint: #BFE3CB;
+  --sticky-sky: #B7D3EF;
+  --sticky-sand: #EAD3A3;
+  --tape: #E4C9A0;
+  --danger: #C1443C;
+  --success: #3E8E5C;
+
+  --shadow-paper: 0 2px 6px rgba(43, 58, 85, 0.10), 0 10px 24px rgba(43, 58, 85, 0.08);
+  --shadow-lift: 0 6px 18px rgba(43, 58, 85, 0.18);
+
+  --radius-torn: 3px 14px 4px 12px / 10px 4px 12px 5px;
+  --radius-card: 10px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Nunito Sans', system-ui, sans-serif;
+  color: var(--ink);
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 31px,
+      var(--rule) 32px
+    ),
+    var(--paper);
+  background-attachment: local;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Red margin rule — a hallmark of ruled notebook paper */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 64px;
+  width: 2px;
+  background: var(--margin);
+  opacity: 0.55;
+  z-index: 0;
+  pointer-events: none;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Caveat', cursive;
+  color: var(--ink);
+  margin: 0 0 0.3em 0;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+h1 { font-size: 2.6rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+p { line-height: 1.55; }
+
+a { color: var(--ink); }
+
+button {
+  font-family: 'Nunito Sans', sans-serif;
+  cursor: pointer;
+}
+
+/* ---------- Reusable notebook components ---------- */
+
+.tape {
+  font-family: 'Patrick Hand', cursive;
+  display: inline-block;
+  background: var(--tape);
+  color: #5A4A2E;
+  padding: 3px 14px;
+  transform: rotate(-2deg);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+  font-size: 0.85rem;
+  letter-spacing: 0.3px;
+}
+
+.paper-card {
+  background: var(--paper-white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-paper);
+  border: 1px solid rgba(43, 58, 85, 0.06);
+  padding: 1.5rem;
+  position: relative;
+}
+
+.torn-card {
+  background: var(--paper-white);
+  border-radius: var(--radius-torn);
+  box-shadow: var(--shadow-paper);
+  padding: 1.25rem 1.4rem;
+  position: relative;
+}
+
+.sticky {
+  border-radius: 4px;
+  padding: 1rem 1.1rem;
+  box-shadow: var(--shadow-paper);
+  transform: rotate(-1deg);
+  transition: transform 0.15s ease;
+}
+.sticky:nth-child(even) { transform: rotate(1.2deg); }
+.sticky:hover { transform: rotate(0deg) scale(1.02); }
+
+.sticky--pink { background: var(--sticky-pink); }
+.sticky--mint { background: var(--sticky-mint); }
+.sticky--sky  { background: var(--sticky-sky); }
+.sticky--sand { background: var(--sticky-sand); }
+
+.btn {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.05rem;
+  border: 2px solid var(--ink);
+  background: var(--paper-white);
+  color: var(--ink);
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+.btn--primary {
+  background: var(--ink);
+  color: var(--paper-white);
+  box-shadow: 3px 3px 0 var(--margin);
+}
+.btn--primary:hover { box-shadow: 4px 4px 0 var(--margin); }
+
+.btn--danger {
+  border-color: var(--danger);
+  color: var(--danger);
+  box-shadow: 3px 3px 0 var(--danger);
+}
+
+.btn--sm { font-size: 0.9rem; padding: 0.3rem 0.8rem; }
+.btn--block { width: 100%; text-align: center; display: block; }
+.btn[disabled] { opacity: 0.5; cursor: not-allowed; box-shadow: none; transform: none; }
+
+.field {
+  margin-bottom: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.field label {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1rem;
+  color: var(--ink-soft);
+}
+.field input,
+.field select,
+.field textarea {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 1rem;
+  padding: 0.55rem 0.7rem;
+  border: none;
+  border-bottom: 2px dashed var(--rule);
+  background: transparent;
+  color: var(--ink);
+  outline: none;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-bottom-color: var(--margin);
+}
+
+.error-note {
+  font-family: 'Patrick Hand', cursive;
+  color: var(--danger);
+  background: #FBEAE8;
+  border-left: 4px solid var(--danger);
+  padding: 0.6rem 0.9rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 0.9rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--ink);
+  background: var(--paper-white);
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Patrick Hand', cursive;
+  font-weight: 700;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  flex-shrink: 0;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.spiral {
+  position: fixed;
+  left: 18px;
+  top: 0;
+  bottom: 0;
+  width: 24px;
+  z-index: 2;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #fff 0, #fff 4px, transparent 5px),
+                     radial-gradient(circle at center, rgba(0,0,0,0.15) 0, transparent 5px);
+  background-size: 24px 42px;
+  background-repeat: repeat-y;
+  background-position: 0 20px;
+  opacity: 0.9;
+}
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-thumb { background: var(--tape); border-radius: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+@media (max-width: 640px) {
+  body::before { left: 28px; }
+  .spiral { display: none; }
+  .container { padding: 1.5rem 1rem 3rem; }
+  h1 { font-size: 2.1rem; }
+}
